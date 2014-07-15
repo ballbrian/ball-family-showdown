@@ -1,0 +1,21 @@
+body {
+    padding: 50px;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+    color: #00B7FF;
+}
+
+.navbar form button, .navbar form .form-group {
+    margin-left: 10px;
+}
+
+.toast-top-right {
+    top: 70px;
+}
+
+.toast-success {
+    background-color: #375a7f;
+}
+

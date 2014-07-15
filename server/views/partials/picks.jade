@@ -1,0 +1,13 @@
+div(ng-controller='picksController')
+    h1 These are the picks
+    select.form-control(ng-model="selectedWeek", ng-change="getWeek(selectedWeek)", ng-options="week.week for week in weeks")
+        option(value="") Select Week
+    div(ng-show="games != null" ng-repeat="game in games")
+        hr.divider
+        .panel.panel-primary
+            .panel-heading
+                h5 {{teamsMap[game.homeTeam].city + " " + teamsMap[game.homeTeam].name}} vs {{teamsMap[game.awayTeam].city + " " + teamsMap[game.awayTeam].name}}
+                select.form-control(ng-model="selectedPick", ng-change="selectPick(game.id, selectedPick)")
+                    option(value='{{teamsMap[game.homeTeam].id}}') {{teamsMap[game.homeTeam].name}}
+                    option(value='{{teamsMap[game.awayTeam].id}}') {{teamsMap[game.awayTeam].name}}
+            .panel-body

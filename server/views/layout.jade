@@ -1,0 +1,33 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/lib/bootstrap/dist/css/bootstrap.min.css')
+    link(rel='stylesheet', href='/assets/stylesheets/bootstrap-theme.min.css')
+    link(rel="stylesheet", href="/lib/toastr/toastr.css")
+    link(rel='stylesheet', href='/assets/stylesheets/style.css')
+    script(type="text/javascript", src="/lib/jquery/dist/jquery.js")
+    script(type="text/javascript", src="/lib/bootstrap/dist/js/bootstrap.js")
+    script(type="text/javascript", src="/lib/toastr/toastr.js")
+    script(type="text/javascript", src="/lib/angular/angular.js")
+    script(type="text/javascript", src="/lib/angular-resource/angular-resource.js")
+    script(type="text/javascript", src="/lib/angular-route/angular-route.js")
+    script(type="text/javascript", src="/app/app.js")
+    script(type="text/javascript", src="/app/controllers/main.js")
+    script(type="text/javascript", src="/app/controllers/login.js")
+    script(type="text/javascript", src="/app/controllers/signup.js")
+    script(type="text/javascript", src="/app/controllers/navigation.js")
+    script(type="text/javascript", src="/app/controllers/profile.js")
+    script(type="text/javascript", src="/app/controllers/picks.js")
+    script(type="text/javascript", src="/app/services/account/bfIdentity.js")
+    script(type="text/javascript", src="/app/services/common/bfNotifier.js")
+    script(type="text/javascript", src="/app/services/account/bfAuth.js")
+    script(type="text/javascript", src="/app/services/account/bfUser.js")
+    script(type="text/javascript", src="/app/services/picks/bfPicks.js")
+    script(type="text/javascript", src="/app/services/picks/bfWeeks.js")
+    script(type="text/javascript", src="/app/services/picks/bfTeams.js")
+    script(type="text/javascript", src="/app/services/picks/bfGames.js")
+
+  body(ng-app='app')
+    include ./includes/currentuser
+    block content

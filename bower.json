@@ -1,0 +1,14 @@
+{
+  "name": "ballshowdown",
+  "version": "0.0.1",
+  "dependencies": {
+    "jquery" : "~2.1.1",
+    "toastr" : "latest",
+    "bootstrap" : "latest",
+    "font-awesome" : "latest",
+    "animate.css" : "latest",
+    "angular" : "latest",
+    "angular-resource" : "latest",
+    "angular-route" : "latest"
+  }
+}
