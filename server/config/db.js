@@ -17,6 +17,9 @@ module.exports = function(config) {
 
     userModel.createDefaultUsers();
     teamsModel.createTeams();
-    weeksModel.createWeeksAndGames();
+    setTimeout(function() {
+        console.log('Waiting To Use API Again!');
+        weeksModel.createWeeksAndGames();
+    }, 5000);
 
 }

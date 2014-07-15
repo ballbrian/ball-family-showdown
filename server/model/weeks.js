@@ -9,11 +9,13 @@ var weekSchema = mongoose.Schema({
 var Week = mongoose.model('Week', weekSchema);
 var Game = gameModel.getGameModel;
 
+var api_key = "xfw4ebcua3pe2tvgwkfhxwyc";
+
 exports.createWeeksAndGames = function() {
     Week.find({}).exec(function(err, collection) {
         if(collection.length === 0) {
             request.get({
-                uri: "http://api.sportsdatallc.org/nfl-t1/2014/REG/schedule.json?api_key=bdw3a2s24mksfv4e989t3t22",
+                uri: "http://api.sportsdatallc.org/nfl-t1/2014/REG/schedule.json?api_key="+api_key,
                 json: true,
                 headers: {
                     'Content-Type' : 'application/x-www-form-urlencoded'
@@ -25,6 +27,7 @@ exports.createWeeksAndGames = function() {
                 }
                 else
                 {
+                    console.log(object);
                     object.weeks.forEach(function(week) {
                         Week.create({
                             week: week.number
@@ -38,6 +41,7 @@ exports.createWeeksAndGames = function() {
                             })
                         });
                     });
+                    console.log("Weeks and Games Created");
                 }
             })
         }

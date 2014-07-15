@@ -9,11 +9,13 @@ var teamSchema = mongoose.Schema({
 
 var Team = mongoose.model('Team', teamSchema);
 
+var api_key = "xfw4ebcua3pe2tvgwkfhxwyc";
+
 exports.createTeams = function() {
     Team.find({}).exec(function(err, collection) {
         if(collection.length === 0) {
             request.get({
-                    uri: "http://api.sportsdatallc.org/nfl-t1/teams/hierarchy.json?api_key=bdw3a2s24mksfv4e989t3t22",
+                    uri: "http://api.sportsdatallc.org/nfl-t1/teams/hierarchy.json?api_key="+api_key,
                     json: true,
                     headers: {
                         'Content-Type' : 'application/x-www-form-urlencoded'
@@ -25,6 +27,7 @@ exports.createTeams = function() {
                     }
                     else
                     {
+                        console.log(object);
                         object.conferences.forEach(function(conference) {
                             conference.divisions.forEach(function(division) {
                                 division.teams.forEach(function(team) {
@@ -36,6 +39,7 @@ exports.createTeams = function() {
                                 });
                             });
                         });
+                        console.log("Teams Created");
                     }
                 })
         }
