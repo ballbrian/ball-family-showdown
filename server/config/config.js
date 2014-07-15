@@ -11,7 +11,7 @@ module.exports = {
     production: {
         enviroment: "Production",
         rootPath: rootPath,
-        db: 'mongodb://localhost/ballshowdown',
+        db: 'mongodb://<dbuser>:<dbpassword>@ds055699.mongolab.com:55699/ballfamilyshowdown',
         port: process.env.PORT || 80
     }
 }
