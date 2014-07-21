@@ -2,6 +2,7 @@ doctype html
 html
   head
     title= title
+    meta(name='viewport' content='width=device-width, maximum-scale=1, initial-scale=1, user-scalable=0')
     link(rel='stylesheet', href='/lib/bootstrap/dist/css/bootstrap.min.css')
     link(rel='stylesheet', href='/assets/stylesheets/bootstrap-theme.min.css')
     link(rel="stylesheet", href="/lib/toastr/toastr.css")
@@ -21,6 +22,7 @@ html
     script(type="text/javascript", src="/app/controllers/picks.js")
     script(type="text/javascript", src="/app/services/account/bfIdentity.js")
     script(type="text/javascript", src="/app/services/common/bfNotifier.js")
+    script(type="text/javascript", src="/app/services/common/dateFormatter.js")
     script(type="text/javascript", src="/app/services/account/bfAuth.js")
     script(type="text/javascript", src="/app/services/account/bfUser.js")
     script(type="text/javascript", src="/app/services/picks/bfPicks.js")

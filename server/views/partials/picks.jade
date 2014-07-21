@@ -2,12 +2,12 @@ div(ng-controller='picksController')
     h1 These are the picks
     select.form-control(ng-model="selectedWeek", ng-change="getWeek(selectedWeek)", ng-options="week.week for week in weeks")
         option(value="") Select Week
-    div(ng-show="games != null" ng-repeat="game in games")
+    div(ng-show="picks != null", ng-repeat="game in picks")
         hr.divider
         .panel.panel-primary
             .panel-heading
-                h5 {{teamsMap[game.homeTeam].city + " " + teamsMap[game.homeTeam].name}} vs {{teamsMap[game.awayTeam].city + " " + teamsMap[game.awayTeam].name}}
-                select.form-control(ng-model="selectedPick", ng-change="selectPick(game.id, selectedPick)")
-                    option(value='{{teamsMap[game.homeTeam].id}}') {{teamsMap[game.homeTeam].name}}
-                    option(value='{{teamsMap[game.awayTeam].id}}') {{teamsMap[game.awayTeam].name}}
+                h5.pull-left {{teamsMap[game.teams[0]].city + " " + teamsMap[game.teams[0]].name}} vs {{teamsMap[game.teams[1]].city + " " + teamsMap[game.teams[1]].name}}
+                h5.pull-right(ng-bind='formattedDate(game.scheduled)')
+                select.form-control(ng-model="game.pick" ng-options="teamsMap[value].name for value in game.teams")
             .panel-body
+    button.btn.btn-primary.submitButton(ng-show="picks != null", ng-click="updatePicks()") Submit

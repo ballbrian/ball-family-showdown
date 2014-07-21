@@ -19,3 +19,8 @@ a {
     background-color: #375a7f;
 }
 
+.submitButton {
+    display: block;
+    width: 100%;
+}
+

@@ -7,7 +7,7 @@ var weekSchema = mongoose.Schema({
 });
 
 var Week = mongoose.model('Week', weekSchema);
-var Game = gameModel.getGameModel;
+var Game = mongoose.model('Game');
 
 var api_key = "xfw4ebcua3pe2tvgwkfhxwyc";
 
@@ -32,13 +32,17 @@ exports.createWeeksAndGames = function() {
                         Week.create({
                             week: week.number
                         })
+                        var gameNumber = 1;
                         week.games.forEach(function(game) {
                             var game = Game.create({
                                 id: game.id,
+                                game: gameNumber,
                                 week: week.number,
+                                scheduled: game.scheduled,
                                 homeTeam: game.home,
                                 awayTeam: game.away
                             })
+                            gameNumber++;
                         });
                     });
                     console.log("Weeks and Games Created");

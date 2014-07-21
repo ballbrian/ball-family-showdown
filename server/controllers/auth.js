@@ -1,6 +1,8 @@
 var passport = require('passport');
 var mongoose = require('mongoose');
 var User = mongoose.model('User');
+var Pick = mongoose.model('Pick');
+var Game = mongoose.model('Game');
 var encrypt = require('../utilities/encryption');
 
 exports.authenticate = function(req, res, next) {
@@ -46,7 +48,20 @@ exports.createUser = function(req, res, next) {
     var userData = req.body;
     userData.username = userData.username.toLowerCase();
     userData.salt = encrypt.createSalt();
-    userData.salt =encrypt.hashPwd(userData.salt, userData.password);
+    userData.password = encrypt.hashPwd(userData.salt, userData.password);
+
+    Game.find({}).exec(function(err, collection) {
+        collection.forEach(function(game) {
+            Pick.create({
+                user: userData.username,
+                week: game.week,
+                game: game.id,
+                scheduled: game.scheduled,
+                teams: [game.homeTeam, game.awayTeam],
+                pick: ""
+            })
+        });
+    });
 
     User.create(userData, function(err, user) {
         if(err) {

@@ -3,8 +3,10 @@ var mongoose = require('mongoose');
 var gameSchema = mongoose.Schema({
     id: String,
     week: String,
+    game: Number,
+    scheduled: Date,
     homeTeam: String,
     awayTeam: String
 });
 
-exports.getGameModel = mongoose.model('Game', gameSchema);
+var Game = mongoose.model('Game', gameSchema);
