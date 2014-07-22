@@ -6,7 +6,12 @@ var picksSchema = mongoose.Schema({
     game: String,
     teams: [String],
     scheduled: Date,
-    pick: String
+    pick: String,
+    stadium: String,
+    city: String,
+    state: String,
+    field: String,
+    type: String
 });
 
 var Picks = mongoose.model('Pick', picksSchema);

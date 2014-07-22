@@ -58,7 +58,12 @@ exports.createUser = function(req, res, next) {
                 game: game.id,
                 scheduled: game.scheduled,
                 teams: [game.homeTeam, game.awayTeam],
-                pick: ""
+                pick: "",
+                stadium: game.stadium,
+                city: game.city,
+                state: game.state,
+                field: game.field,
+                type: game.type
             })
         });
     });

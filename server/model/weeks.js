@@ -3,7 +3,8 @@ var gameModel = require('./games');
 var request = require('request');
 
 var weekSchema = mongoose.Schema({
-    week: String
+    week: String,
+    start: Date
 });
 
 var Week = mongoose.model('Week', weekSchema);
@@ -27,10 +28,10 @@ exports.createWeeksAndGames = function() {
                 }
                 else
                 {
-                    console.log(object);
                     object.weeks.forEach(function(week) {
                         Week.create({
-                            week: week.number
+                            week: week.number,
+                            start: week.games[0].scheduled
                         })
                         var gameNumber = 1;
                         week.games.forEach(function(game) {
@@ -40,7 +41,12 @@ exports.createWeeksAndGames = function() {
                                 week: week.number,
                                 scheduled: game.scheduled,
                                 homeTeam: game.home,
-                                awayTeam: game.away
+                                awayTeam: game.away,
+                                stadium: game.venue.name,
+                                city: game.venue.city,
+                                state: game.venue.state,
+                                field: game.venue.surface,
+                                type: game.venue.type
                             })
                             gameNumber++;
                         });

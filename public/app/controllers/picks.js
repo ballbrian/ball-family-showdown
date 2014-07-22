@@ -6,7 +6,20 @@ angular.module('app').controller('picksController', function($scope, dateFormatt
         }
     });
 
-    $scope.weeks = bfWeeks.query();
+    $scope.weeks = bfWeeks.query(function(data) {
+        var weekFound = false;
+        $scope.weeks.forEach(function(week) {
+            if(weekFound == false) {
+                var currentDate = new Date();
+                var startDate = new Date(week.start);
+                if(startDate.getTime() > currentDate.getTime()) {
+                    $scope.selectedWeek = week;
+                    $scope.getWeek(week);
+                    weekFound = true;
+                }
+            }
+        })
+    });
 
     $scope.formattedDate = function(date) {
         var formattedDate = new Date(date);

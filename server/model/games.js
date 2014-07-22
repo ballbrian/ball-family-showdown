@@ -6,7 +6,12 @@ var gameSchema = mongoose.Schema({
     game: Number,
     scheduled: Date,
     homeTeam: String,
-    awayTeam: String
+    awayTeam: String,
+    stadium: String,
+    city: String,
+    state: String,
+    field: String,
+    type: String
 });
 
 var Game = mongoose.model('Game', gameSchema);

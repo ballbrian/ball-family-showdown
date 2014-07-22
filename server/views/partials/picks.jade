@@ -1,13 +1,20 @@
 div(ng-controller='picksController')
     h1 These are the picks
-    select.form-control(ng-model="selectedWeek", ng-change="getWeek(selectedWeek)", ng-options="week.week for week in weeks")
+    div.centerLoad
+        i.fa.fa-cog.fa-spin.fa-5x(ng-hide="true")
+    select.form-control(ng-cloak ng-model="selectedWeek", ng-change="getWeek(selectedWeek)", ng-options="week.week for week in weeks")
         option(value="") Select Week
-    div(ng-show="picks != null", ng-repeat="game in picks")
-        hr.divider
-        .panel.panel-primary
-            .panel-heading
-                h5.pull-left {{teamsMap[game.teams[0]].city + " " + teamsMap[game.teams[0]].name}} vs {{teamsMap[game.teams[1]].city + " " + teamsMap[game.teams[1]].name}}
-                h5.pull-right(ng-bind='formattedDate(game.scheduled)')
-                select.form-control(ng-model="game.pick" ng-options="teamsMap[value].name for value in game.teams")
-            .panel-body
-    button.btn.btn-primary.submitButton(ng-show="picks != null", ng-click="updatePicks()") Submit
+    div.picks(ng-show="picks != null")
+        div(ng-repeat="game in picks")
+            hr.divider
+            .panel.panel-primary
+                .panel-heading
+                    h5.pull-left {{teamsMap[game.teams[0]].city + " " + teamsMap[game.teams[0]].name}} vs {{teamsMap[game.teams[1]].city + " " + teamsMap[game.teams[1]].name}}
+                    h5.pull-right(ng-bind='formattedDate(game.scheduled)')
+                    select.form-control(ng-model="game.pick" ng-options="teamsMap[value].name for value in game.teams")
+                .panel-body
+                    h6 {{game.stadium}}
+                    h6 {{game.city}}, {{game.state}}
+                    h6 {{game.field}}
+                    h6 {{game.type}}
+        button.btn.btn-primary.submitButton(ng-show="picks != null", ng-click="updatePicks()") Submit
