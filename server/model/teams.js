@@ -27,7 +27,6 @@ exports.createTeams = function() {
                     }
                     else
                     {
-                        console.log(object);
                         object.conferences.forEach(function(conference) {
                             conference.divisions.forEach(function(division) {
                                 division.teams.forEach(function(team) {

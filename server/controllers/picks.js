@@ -6,10 +6,10 @@ var Pick = require('mongoose').model('Pick');
 exports.getTeams = function(req, res) {
     Team.find({}).exec(function(err, collection) {
         if(err) {
-            console.log("ERROR");
-            console.log(err);
+            res.status(404);
+            res.send({message: "No Teams Were Found"})
         } else {
-            console.log("SUCCESS");
+            res.status(200);
             res.send(collection);
         }
     })
@@ -18,8 +18,10 @@ exports.getTeams = function(req, res) {
 exports.getWeeks = function(req, res) {
     Week.find({}).exec(function(err, collection) {
         if(err) {
-            console.log(err);
+            res.status(404);
+            res.send({message: "No Weeks Were Found"})
         } else {
+            res.status(200);
             res.send(collection);
         }
 
@@ -29,8 +31,10 @@ exports.getWeeks = function(req, res) {
 exports.getGamesForWeek = function(req, res) {
     Game.find({week: req.params.week}).exec(function(err, collection) {
         if(err) {
-            console.log(err);
+            res.status(404);
+            res.send({message: "No Games Were Found"})
         } else {
+            res.status(200);
             res.send(collection);
         }
     })
@@ -39,8 +43,10 @@ exports.getGamesForWeek = function(req, res) {
 exports.getPicksForUserForWeek = function(req, res) {
     Pick.find({user: req.params.user, week: req.params.week}).exec(function(err, collection) {
         if(err) {
-            console.log(err);
+            res.status(404);
+            res.send({message: "No Picks Were Found"})
         } else {
+            res.status(200);
             res.send(collection);
         }
     })
@@ -54,13 +60,13 @@ exports.savePicks = function(req, res) {
             pick.pick = updatedPick.pick;
             pick.save(function(err) {
                 if(err) {
-                    console.log(err);
+                    res.status(404);
+                    res.send({message: "Picks were not Saved"})
                 } else {
-                    console.log("Updated");
+                    res.status(200);
+                    res.send({message: "Picks were Saved"})
                 }
             })
         })
     });
-
-    console.log("Done");
 }

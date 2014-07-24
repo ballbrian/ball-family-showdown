@@ -22,6 +22,10 @@ angular.module('app').config(function($routeProvider, $locationProvider){
             controller: "profileController",
             resolve: routeRoleChecks.user
         })
+        .when('/standings', {
+            templateUrl: '/partials/standings',
+            controller: "standingsController"
+        })
         .when('/picks', {
             templateUrl: 'partials/picks',
             controller: 'picksController',

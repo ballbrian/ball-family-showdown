@@ -8,6 +8,7 @@
     ul.nav.navbar-nav.navbar-right(ng-show="identity.isAuthenticated()")
         li.dropdown
             a.dropdown-toggle(href="", data-toggle="dropdown")
+                img(src="http://placehold.it/30x30" style="padding-right: 10px")
                 | {{identity.currentUser.firstName + " " + identity.currentUser.lastName}}
                 b.caret
             ul.dropdown-menu

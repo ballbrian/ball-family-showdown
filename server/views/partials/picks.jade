@@ -1,5 +1,5 @@
 div(ng-controller='picksController')
-    h1 These are the picks
+    h1 Picks
     div.centerLoad
         i.fa.fa-cog.fa-spin.fa-5x(ng-hide="true")
     select.form-control(ng-cloak ng-model="selectedWeek", ng-change="getWeek(selectedWeek)", ng-options="week.week for week in weeks")
@@ -13,8 +13,12 @@ div(ng-controller='picksController')
                     h5.pull-right(ng-bind='formattedDate(game.scheduled)')
                     select.form-control(ng-model="game.pick" ng-options="teamsMap[value].name for value in game.teams")
                 .panel-body
-                    h6 {{game.stadium}}
-                    h6 {{game.city}}, {{game.state}}
-                    h6 {{game.field}}
-                    h6 {{game.type}}
+                    .col-sm-6
+                        h5 <strong>Stadium:</strong> {{game.stadium}}
+                    .col-sm-6
+                        h5 <strong>Turf:</strong> {{game.field}}
+                    .col-sm-6
+                        h5 <strong>City:</strong> {{game.city}}, {{game.state}}
+                    .col-sm-6
+                        h5 <strong>Stadium Type:</strong> {{game.type}}
         button.btn.btn-primary.submitButton(ng-show="picks != null", ng-click="updatePicks()") Submit

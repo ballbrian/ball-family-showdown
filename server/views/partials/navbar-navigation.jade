@@ -1,6 +1,6 @@
 ul.nav.navbar-nav(ng-controller="navigationController")
     li
-        a(href="#") Standings
+        a(href="/standings") Standings
     li(ng-show="identity.isAuthenticated()")
         a(href="/picks") Picks
 div(ng-include="'/partials/navbar-login'")

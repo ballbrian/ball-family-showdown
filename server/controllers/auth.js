@@ -52,6 +52,12 @@ exports.createUser = function(req, res, next) {
 
     Game.find({}).exec(function(err, collection) {
         collection.forEach(function(game) {
+
+            var field = game.field.split("_").join(" ");
+            field = field.charAt(0).toUpperCase() + field.substring(1);
+            var type = game.type.split("_").join(" ");
+            type = type.charAt(0).toUpperCase() + type.substring(1);
+
             Pick.create({
                 user: userData.username,
                 week: game.week,
@@ -62,8 +68,8 @@ exports.createUser = function(req, res, next) {
                 stadium: game.stadium,
                 city: game.city,
                 state: game.state,
-                field: game.field,
-                type: game.type
+                field: field,
+                type: type
             })
         });
     });
