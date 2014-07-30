@@ -9,7 +9,7 @@ exports.getStandings = function(req, res) {
         } else {
             var standings = []
             collection.forEach(function (user) {
-                standings.push({username: user.username, firstName: user.firstName, lastName: user.lastName});
+                standings.push({username: user.username, firstName: user.firstName, lastName: user.lastName, score: user.score});
             })
 
             res.status(200);

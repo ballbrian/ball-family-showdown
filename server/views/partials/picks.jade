@@ -1,5 +1,6 @@
 div(ng-controller='picksController')
-    h1 Picks
+    .page-header
+        h1 Picks
     div.centerLoad
         i.fa.fa-cog.fa-spin.fa-5x(ng-hide="true")
     select.form-control(ng-cloak ng-model="selectedWeek", ng-change="getWeek(selectedWeek)", ng-options="week.week for week in weeks")
@@ -9,16 +10,23 @@ div(ng-controller='picksController')
             hr.divider
             .panel.panel-primary
                 .panel-heading
-                    h5.pull-left {{teamsMap[game.teams[0]].city + " " + teamsMap[game.teams[0]].name}} vs {{teamsMap[game.teams[1]].city + " " + teamsMap[game.teams[1]].name}}
-                    h5.pull-right(ng-bind='formattedDate(game.scheduled)')
-                    select.form-control(ng-model="game.pick" ng-options="teamsMap[value].name for value in game.teams")
+                    .row
+                        .col-xs-12
+                            h5.pull-left {{teamsMap[game.teams[0]].city + " " + teamsMap[game.teams[0]].name}} vs {{teamsMap[game.teams[1]].city + " " + teamsMap[game.teams[1]].name}}
+                            h5.pull-right(ng-bind='formattedDate(game.scheduled)')
+                    .row
+                        .col-xs-8
+                            select.form-control(ng-model="game.pick" ng-options="teamsMap[value].name for value in game.teams")
+                        .col-xs-4
+                            select.form-control(ng-model="game.points" ng-options="point for point in getAvailablePoints(game)")
+                                option(value="0") Points
                 .panel-body
-                    .col-sm-6
+                    .col-sm-6.col-md-3
                         h5 <strong>Stadium:</strong> {{game.stadium}}
-                    .col-sm-6
+                    .col-sm-6.col-md-3
                         h5 <strong>Turf:</strong> {{game.field}}
-                    .col-sm-6
+                    .col-sm-6.col-md-3
                         h5 <strong>City:</strong> {{game.city}}, {{game.state}}
-                    .col-sm-6
+                    .col-sm-6.col-md-3
                         h5 <strong>Stadium Type:</strong> {{game.type}}
         button.btn.btn-primary.submitButton(ng-show="picks != null", ng-click="updatePicks()") Submit

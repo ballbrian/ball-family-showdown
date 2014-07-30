@@ -2,6 +2,7 @@ var mongoose = require('mongoose');
 
 var picksSchema = mongoose.Schema({
     user: String,
+    points: Number,
     week: String,
     game: String,
     teams: [String],

@@ -58,8 +58,10 @@ exports.savePicks = function(req, res) {
     picks.forEach(function(updatedPick) {
         Pick.findOne({game: updatedPick.game, user: updatedPick.user}, function(err, pick) {
             pick.pick = updatedPick.pick;
+            pick.points = updatedPick.points;
             pick.save(function(err) {
                 if(err) {
+                    console.log(err);
                     res.status(404);
                     res.send({message: "Picks were not Saved"})
                 } else {

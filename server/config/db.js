@@ -17,7 +17,7 @@ module.exports = function(config) {
         console.log('ballshowdown db opened');
     });
 
-    userModel.createDefaultUsers();
+//    userModel.createDefaultUsers();
 
     teamsModel.createTeams();
     setTimeout(function() {

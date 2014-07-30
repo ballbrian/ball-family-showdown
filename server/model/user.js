@@ -4,6 +4,8 @@ var encrypt = require('../utilities/encryption');
 var userSchema = mongoose.Schema({
     firstName : {type: String, required: "{PATH} is required"},
     lastName : {type: String, required: "{PATH} is required"},
+    email: {type: String, required: "{PATH} is required"},
+    score: {type: Number, required: "{PATH} is required"},
     username : {
         type: String,
         required: "{PATH} is required",
@@ -34,18 +36,11 @@ exports.createDefaultUsers = function() {
                 firstName: "Brian",
                 lastName : "Ball",
                 username : "bball",
+                email: "ballbrian.a@gmail.com",
                 salt : salt,
                 password: hash,
-                roles: ['admin']
-            });
-            salt = encrypt.createSalt();
-            hash = encrypt.hashPwd(salt, 'test');
-            User.create({
-                firstName: "Test",
-                lastName : "User",
-                username : "test",
-                salt : salt,
-                password: hash
+                roles: ['admin'],
+                score: 0
             });
         }
     })

@@ -3,5 +3,6 @@ module.exports = function (app) {
     require('./standings') (app);
     require('./picks') (app);
     require('./auth') (app);
+    require('./user') (app);
     require('./main') (app);
 }

@@ -4,6 +4,10 @@
             fieldset
                 legend New User Information
                 .form-group
+                    label.col-md-2.control-label(for="username") Username
+                    .col-md-10
+                        input.form-control(name="username", type="username", placeholder="Username", ng-model="username", required)
+                .form-group
                     label.col-md-2.control-label(for="email") Email
                     .col-md-10
                         input.form-control(name="email", type="email", placeholder="Email", ng-model="email", required)
@@ -20,8 +24,13 @@
                     .col-md-10
                         input.form-control(name="lastName", type="text", placeholder="Last Name", ng-model="lastName", required)
                 .form-group
+                    label.col-md-2.control-label(for="photo") Profile Photo
+                    .col-md-10
+                        img(src="http://placehold.it/250x250" style="padding: 0 10px 10px 0")
+                        input(type="file", ng-file-select="onFileSelect($file)", accept="image/*", onclick="this.value=null")
+                .form-group
                     .col-md-10.col-md-offset-2
                         .pull-right
-                            button.btn.btn-primary(ng-click="signup()", ng-disabled="signupForm.$invalid") Submit
+                            button.btn.btn-primary(ng-click="signup()", ng-disabled="signupForm.$invalid" ) Submit
                             | &nbsp;
                             a.btn.btn-default(href="/") Cancel

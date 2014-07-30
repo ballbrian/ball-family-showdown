@@ -3,6 +3,7 @@ angular.module('app').controller('loginController', function($scope, $http, bfId
     $scope.signin = function(username, password) {
         bfAuth.authenticateUser(username, password).then(function(success) {
            if(success) {
+               $location.path('/picks');
                bfNotifier.notify('You have successfully signed in!');
            } else {
                bfNotifier.error('Username/Password combination incorrect');

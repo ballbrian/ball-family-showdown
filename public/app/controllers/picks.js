@@ -1,4 +1,6 @@
 angular.module('app').controller('picksController', function($scope, dateFormatter, bfNotifier, bfIdentity, bfPicks, bfWeeks, bfGames, bfTeams) {
+    $scope.maxPoints = [];
+
     $scope.teamsMap = {};
     var teams = bfTeams.query(function() {
         for(var i = 0; i < teams.length; i++) {
@@ -28,8 +30,30 @@ angular.module('app').controller('picksController', function($scope, dateFormatt
 
     $scope.getWeek = function(week) {
         if(week != null) {
-            $scope.picks = bfPicks.query({"week": week.week, "user": bfIdentity.currentUser.username});
+            $scope.picks = bfPicks.query({"week": week.week, "user": bfIdentity.currentUser.username}, function(picks) {
+                $scope.maxPoints = [];
+                var point = 0;
+                $scope.maxPoints.push(point);
+                point++;
+                picks.forEach(function(pick) {
+                    $scope.maxPoints.push(point);
+                    point++;
+                })
+            });
         }
+    }
+
+    $scope.getAvailablePoints = function(currentPick) {
+        var availablePoints = $scope.maxPoints.slice(0);
+        $scope.picks.forEach(function (pick) {
+            if(pick.game != currentPick.game) {
+                var index = availablePoints.indexOf(pick.points);
+                if(index != -1) {
+                    availablePoints.splice(index, 1);
+                }
+            }
+        })
+        return availablePoints;
     }
 
     $scope.updatePicks = function() {
