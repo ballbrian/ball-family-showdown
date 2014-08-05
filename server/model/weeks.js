@@ -16,7 +16,7 @@ exports.createWeeksAndGames = function() {
     Week.find({}).exec(function(err, collection) {
         if(collection.length === 0) {
             request.get({
-                uri: "http://api.sportsdatallc.org/nfl-t1/2014/REG/schedule.json?api_key="+api_key,
+                uri: "http://api.sportsdatallc.org/nfl-t1/2014/PRE/schedule.json?api_key="+api_key,
                 json: true,
                 headers: {
                     'Content-Type' : 'application/x-www-form-urlencoded'

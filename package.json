@@ -19,5 +19,11 @@
     "passport-local": "^1.0.0",
     "request": "^2.37.0",
     "static-favicon": "~1.0.0"
+  },
+  "devDependencies": {
+    "blanket": "^1.1.6",
+    "chai": "^1.9.1",
+    "sinon": "^1.10.3",
+    "supertest": "^0.13.0"
   }
 }

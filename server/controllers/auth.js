@@ -1,9 +1,4 @@
 var passport = require('passport');
-//var mongoose = require('mongoose');
-//var User = mongoose.model('User');
-//var Pick = mongoose.model('Pick');
-//var Game = mongoose.model('Game');
-//var encrypt = require('../utilities/encryption');
 
 exports.authenticate = function(req, res, next) {
     req.body.username = req.body.username.toLowerCase();
