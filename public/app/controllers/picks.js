@@ -23,6 +23,32 @@ angular.module('app').controller('picksController', function($scope, dateFormatt
         })
     });
 
+    $scope.getPoints = function(score) {
+        if(score != 0) {
+            return score;
+        } else {
+            return "";
+        }
+    }
+
+    $scope.getGameStatus = function(status) {
+        status = status.toLowerCase();
+        if(status == "closed") {
+            return "Final";
+        } else if (status == "scheduled") {
+            return ""
+        }
+    }
+
+    $scope.disablePick = function(status) {
+        status = status.toLowerCase();
+        if (status == "scheduled") {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     $scope.formattedDate = function(date) {
         var formattedDate = new Date(date);
         return dateFormatter.FormatDate(formattedDate, "dddd MMM d, yyyy @ h:mmtt", "");

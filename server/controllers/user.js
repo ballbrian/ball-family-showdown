@@ -10,6 +10,8 @@ exports.createUser = function(req, res, next) {
     userData.salt = encrypt.createSalt();
     userData.password = encrypt.hashPwd(userData.salt, userData.password);
     userData.score = 0;
+    userData.correct = 0;
+    userData.total = 0;
 
     Game.find({}).exec(function(err, collection) {
         collection.forEach(function(game) {
@@ -25,13 +27,16 @@ exports.createUser = function(req, res, next) {
                 week: game.week,
                 game: game.id,
                 scheduled: game.scheduled,
+                scores: [0, 0],
                 teams: [game.homeTeam, game.awayTeam],
                 pick: "",
                 stadium: game.stadium,
                 city: game.city,
                 state: game.state,
                 field: field,
-                type: type
+                type: type,
+                status: "Scheduled",
+                calculated: false
             })
         });
     });
@@ -77,7 +82,6 @@ exports.updateUser = function(req, res) {
             res.send(req.user);
         }
     })
-
 };
 
 exports.getUsers = function(req, res) {

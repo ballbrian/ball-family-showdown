@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var Game = mongoose.model('Game');
 var User = mongoose.model('User');
 
 exports.getStandings = function(req, res) {
@@ -9,7 +10,7 @@ exports.getStandings = function(req, res) {
         } else {
             var standings = []
             collection.forEach(function (user) {
-                standings.push({username: user.username, firstName: user.firstName, lastName: user.lastName, score: user.score});
+                standings.push({username: user.username, firstName: user.firstName, lastName: user.lastName, score: user.score, correct: user.correct, total: user.total});
             })
 
             res.status(200);

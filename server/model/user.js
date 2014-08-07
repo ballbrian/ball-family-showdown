@@ -6,6 +6,8 @@ var userSchema = mongoose.Schema({
     lastName : {type: String, required: "{PATH} is required"},
     email: {type: String, required: "{PATH} is required"},
     score: {type: Number, required: "{PATH} is required"},
+    correct: {type: Number, required: "{PATH} is required"},
+    total: {type: Number, required: "{PATH} is required"},
     username : {
         type: String,
         required: "{PATH} is required",
@@ -40,7 +42,9 @@ exports.createDefaultUsers = function() {
                 salt : salt,
                 password: hash,
                 roles: ['admin'],
-                score: 0
+                score: 0,
+                correct: 0,
+                total: 0
             });
         }
     })

@@ -5,6 +5,7 @@ var picksSchema = mongoose.Schema({
     points: Number,
     week: String,
     game: String,
+    scores: [Number],
     teams: [String],
     scheduled: Date,
     pick: String,
@@ -12,7 +13,9 @@ var picksSchema = mongoose.Schema({
     city: String,
     state: String,
     field: String,
-    type: String
+    type: String,
+    status: String,
+    calculated: Boolean
 });
 
 var Picks = mongoose.model('Pick', picksSchema);

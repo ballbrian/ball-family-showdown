@@ -10,15 +10,20 @@ div(ng-controller='picksController')
             hr.divider
             .panel.panel-primary
                 .panel-heading
-                    .row
-                        .col-xs-12
-                            h5.pull-left {{teamsMap[game.teams[0]].city + " " + teamsMap[game.teams[0]].name}} vs {{teamsMap[game.teams[1]].city + " " + teamsMap[game.teams[1]].name}}
-                            h5.pull-right(ng-bind='formattedDate(game.scheduled)')
+                    .row.pickHeader
+                        .col-xs-6
+                            h5
+                            | <span class="label label-default">{{getGameStatus(game.status)}}</span>
+                            | {{teamsMap[game.teams[0]].city + " " + teamsMap[game.teams[0]].name}} <span class="badge">{{getPoints(game.scores[0])}}</span>
+                            | vs
+                            | {{teamsMap[game.teams[1]].city + " " + teamsMap[game.teams[1]].name}} <span class="badge">{{getPoints(game.scores[1])}}</span>
+                        .col-xs-6
+                            h5.pull-right(ng-hide="game.status=='closed'", ng-bind='formattedDate(game.scheduled)')
                     .row
                         .col-xs-8
-                            select.form-control(ng-model="game.pick" ng-options="teamsMap[value].name for value in game.teams")
+                            select.form-control(ng-model="game.pick" ng-options="teamsMap[value].name for value in game.teams", ng-disabled="disablePick(game.status)")
                         .col-xs-4
-                            select.form-control(ng-model="game.points" ng-options="point for point in getAvailablePoints(game)")
+                            select.form-control(ng-model="game.points" ng-options="point for point in getAvailablePoints(game)", ng-disabled="disablePick(game.status)")
                                 option(value="0") Points
                 .panel-body
                     .col-sm-6.col-md-3
@@ -29,4 +34,4 @@ div(ng-controller='picksController')
                         h5 <strong>City:</strong> {{game.city}}, {{game.state}}
                     .col-sm-6.col-md-3
                         h5 <strong>Stadium Type:</strong> {{game.type}}
-        button.btn.btn-primary.submitButton(ng-show="picks != null", ng-click="updatePicks()") Submit
+        button.btn.btn-primary.submitButton(ng-show="picks != null && selectedWeek.completed != true", ng-click="updatePicks()") Submit

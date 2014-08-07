@@ -14,4 +14,4 @@ div(ng-controller='standingsController')
                 .pull-right {{standing.score}}
             h4 <strong>{{standing.username}}</strong> - <small>{{standing.firstName}} {{standing.lastName}}</small>
             .progress
-                .progress-bar(role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;") <strong>60% Correct</strong>
+                .progress-bar(role="progressbar" aria-valuenow="{{(standing.correct/standing.total)*100}}" aria-valuemin="0" aria-valuemax="100" style="width: {{(standing.correct/standing.total)*100}}%;") <strong>{{(standing.correct/standing.total)*100}}% Correct</strong>
