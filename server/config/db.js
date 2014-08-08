@@ -24,9 +24,10 @@ module.exports = function(config) {
         weeksModel.createWeeksAndGames();
     }, 5000);
 
-//    var rule = new schedule.RecurrenceRule();
+    var rule = new schedule.RecurrenceRule();
 
-    schedule.scheduleJob("0	19,20,21,22	* * 4,5,6", function() {
+    schedule.scheduleJob(rule, function() {
+//    schedule.scheduleJob("0	19,20,21,22	* * 4,5,6", function() {
         var today = new Date();
         var dd = today.getDate();
         var mm = today.getMonth()+1; //January is 0!
@@ -43,7 +44,7 @@ module.exports = function(config) {
             mm='0'+mm
         }
 
-        weeksModel.updateGames(today);
+//        weeksModel.updateGames(today);
 
         today = mm+'/'+dd+'/'+yyyy + " - " + hh+":"+mm+":"+ss;
 

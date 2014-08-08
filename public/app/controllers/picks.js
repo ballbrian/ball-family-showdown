@@ -23,8 +23,9 @@ angular.module('app').controller('picksController', function($scope, dateFormatt
         })
     });
 
-    $scope.getPoints = function(score) {
-        if(score != 0) {
+    $scope.getPoints = function(score, status) {
+        status = status.toLowerCase();
+        if(status == "inprogress" || status == "closed") {
             return score;
         } else {
             return "";
@@ -35,6 +36,8 @@ angular.module('app').controller('picksController', function($scope, dateFormatt
         status = status.toLowerCase();
         if(status == "closed") {
             return "Final";
+        } else if (status == "inprogress") {
+            return "In Progress"
         } else if (status == "scheduled") {
             return ""
         }
@@ -42,10 +45,10 @@ angular.module('app').controller('picksController', function($scope, dateFormatt
 
     $scope.disablePick = function(status) {
         status = status.toLowerCase();
-        if (status == "scheduled") {
-            return false;
-        } else {
+        if (status == "inprogress" || status == "closed") {
             return true;
+        } else {
+            return false;
         }
     }
 

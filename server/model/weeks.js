@@ -147,7 +147,6 @@ function getGames(games) {
         var game = games.shift();
         if(game != null) {
             Pick.find({game: game.id}, function (err, picks) {
-                console.log(picks);
                 if (err) {
                     console.log(err.message);
                 } else {
@@ -173,7 +172,7 @@ var updatePicks = function(picks, game) {
         if(pick != null) {
             pick.status = game.status;
             pick.scores = [game.home_team.points, game.away_team.points];
-
+            console.log("Hello");
             if(game.status == 'closed') {
                 if(pick.calculated === false) {
                     var winner = 0;
@@ -218,6 +217,14 @@ var updatePicks = function(picks, game) {
                         }
                     })
                 }
+            } else {
+                pick.save(function(err) {
+                    if(err) {
+                        console.log(err);
+                    } else {
+                        console.log("Game Updated");
+                    }
+                });
             }
 
             update();

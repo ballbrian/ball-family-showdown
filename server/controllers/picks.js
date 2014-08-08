@@ -41,7 +41,7 @@ exports.getGamesForWeek = function(req, res) {
 }
 
 exports.getPicksForUserForWeek = function(req, res) {
-    Pick.find({user: req.params.user, week: req.params.week}).exec(function(err, collection) {
+    Pick.find({user: req.params.user, week: req.params.week}).sort({scheduled: 1}).exec(function(err, collection) {
         if(err) {
             res.status(404);
             res.send({message: "No Picks Were Found"})
