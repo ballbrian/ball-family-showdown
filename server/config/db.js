@@ -24,9 +24,17 @@ module.exports = function(config) {
         weeksModel.createWeeksAndGames();
     }, 5000);
 
+    //CST is -500 UTC
+    // 7 = 0
+    // 8 = 1
+    // 9 = 2
+    // 10 = 3
+    // 11 = 4
+
+
     var rule = new schedule.RecurrenceRule();
-    rule.dayOfWeek = new schedule.Range(4,6);
-    rule.hour = new schedule.Range(4, 5);
+    rule.dayOfWeek = [0, new schedule.Range(5,6)];
+    rule.hour = new schedule.Range(0, 4);
     rule.minute = [0, 15, 30, 45];
 
     schedule.scheduleJob(rule, function() {
