@@ -24,6 +24,8 @@ module.exports = function(config) {
         weeksModel.createWeeksAndGames();
     }, 5000);
 
+    weeksModel.updateGames(today);
+
     var rule = new schedule.RecurrenceRule();
 
 //    schedule.scheduleJob(rule, function() {
