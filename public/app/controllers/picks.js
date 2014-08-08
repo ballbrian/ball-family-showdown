@@ -25,7 +25,7 @@ angular.module('app').controller('picksController', function($scope, dateFormatt
 
     $scope.getPoints = function(score, status) {
         status = status.toLowerCase();
-        if(status == "inprogress" || status == "closed") {
+        if(status == "inprogress" || status == "closed" || status == "complete" || status == "delayed") {
             return score;
         } else {
             return "";
@@ -34,18 +34,20 @@ angular.module('app').controller('picksController', function($scope, dateFormatt
 
     $scope.getGameStatus = function(status) {
         status = status.toLowerCase();
-        if(status == "closed") {
+        if(status == "closed" || status == "complete") {
             return "Final";
         } else if (status == "inprogress") {
-            return "In Progress"
+            return "In Progress";
+        } else if (status == "delayed") {
+            return "Delayed";
         } else if (status == "scheduled") {
-            return ""
+            return "";
         }
     }
 
     $scope.disablePick = function(status) {
         status = status.toLowerCase();
-        if (status == "inprogress" || status == "closed") {
+        if (status == "inprogress" || status == "closed" || status == "delayed" || status == "complete") {
             return true;
         } else {
             return false;

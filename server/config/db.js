@@ -24,14 +24,19 @@ module.exports = function(config) {
         weeksModel.createWeeksAndGames();
     }, 5000);
 
-//    var rule = new schedule.RecurrenceRule();
+    var rule = new schedule.RecurrenceRule();
+    rule.dayOfWeek = new schedule.Range(4,6);
+    rule.hour = new schedule.Range(19, 22);
+    rule.minute = [0, 15, 30, 45];
 
-//    schedule.scheduleJob(rule, function() {
-    schedule.scheduleJob("*/15 19,20,21,22 * * 4,5,6", function() {
+    schedule.scheduleJob(rule, function() {
+//    schedule.scheduleJob("*/15 19,20,21,22 * * 4,5,6", function() {
         RunUpdate();
     })
 
-    RunUpdate();
+    setTimeout(function() {
+        RunUpdate();
+    }, 10000);
 
 }
 

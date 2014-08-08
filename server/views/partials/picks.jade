@@ -18,7 +18,7 @@ div(ng-controller='picksController')
                             | vs
                             | {{teamsMap[game.teams[1]].city + " " + teamsMap[game.teams[1]].name}} <span class="badge">{{getPoints(game.scores[1], game.status)}}</span>
                         .col-xs-6
-                            h5.pull-right(ng-hide="game.status=='closed' || game.status=='inprogress'", ng-bind='formattedDate(game.scheduled)')
+                            h5.pull-right(ng-hide="disablePick(game.status)", ng-bind='formattedDate(game.scheduled)')
                     .row
                         .col-xs-8
                             select.form-control(ng-model="game.pick" ng-options="teamsMap[value].name for value in game.teams", ng-disabled="disablePick(game.status)")

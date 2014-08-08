@@ -172,7 +172,7 @@ var updatePicks = function(picks, game) {
         if(pick != null) {
             pick.status = game.status;
             pick.scores = [game.home_team.points, game.away_team.points];
-            if(game.status == 'closed') {
+            if(game.status == 'closed' || game.status == 'complete') {
                 if(pick.calculated === false) {
                     var winner = 0;
                     if (game.away_team.points > game.home_team.points) {
