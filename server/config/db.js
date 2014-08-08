@@ -26,7 +26,7 @@ module.exports = function(config) {
 
     var rule = new schedule.RecurrenceRule();
     rule.dayOfWeek = new schedule.Range(4,6);
-    rule.hour = new schedule.Range(19, 22);
+    rule.hour = new schedule.Range(4, 5);
     rule.minute = [0, 15, 30, 45];
 
     schedule.scheduleJob(rule, function() {
