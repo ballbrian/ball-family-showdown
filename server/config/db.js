@@ -24,34 +24,37 @@ module.exports = function(config) {
         weeksModel.createWeeksAndGames();
     }, 5000);
 
-    weeksModel.updateGames(today);
-
-    var rule = new schedule.RecurrenceRule();
+//    var rule = new schedule.RecurrenceRule();
 
 //    schedule.scheduleJob(rule, function() {
     schedule.scheduleJob("0	19,20,21,22	* * 4,5,6", function() {
-        var today = new Date();
-        var dd = today.getDate();
-        var mm = today.getMonth()+1; //January is 0!
-        var yyyy = today.getFullYear();
-        var hh = today.getHours();
-        var mm = today.getMinutes();
-        var ss = today.getSeconds();
-
-        if(dd<10) {
-            dd='0'+dd
-        }
-
-        if(mm<10) {
-            mm='0'+mm
-        }
-
-        weeksModel.updateGames(today);
-
-        today = mm+'/'+dd+'/'+yyyy + " - " + hh+":"+mm+":"+ss;
-
-        console.log('Job Ran: ' + today);
-
+        RunUpdate();
     })
 
+    RunUpdate();
+
+}
+
+var RunUpdate = function() {
+    var today = new Date();
+    var dd = today.getDate();
+    var mm = today.getMonth()+1; //January is 0!
+    var yyyy = today.getFullYear();
+    var hh = today.getHours();
+    var mm = today.getMinutes();
+    var ss = today.getSeconds();
+
+    if(dd<10) {
+        dd='0'+dd
+    }
+
+    if(mm<10) {
+        mm='0'+mm
+    }
+
+    weeksModel.updateGames(today);
+
+    today = mm+'/'+dd+'/'+yyyy + " - " + hh+":"+mm+":"+ss;
+
+    console.log('Job Ran: ' + today);
 }
