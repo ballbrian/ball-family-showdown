@@ -27,7 +27,7 @@ module.exports = function(config) {
 //    var rule = new schedule.RecurrenceRule();
 
 //    schedule.scheduleJob(rule, function() {
-    schedule.scheduleJob("0	19,20,21,22	* * 4,5,6", function() {
+    schedule.scheduleJob("*/15	19,20,21,22	* * 4,5,6", function() {
         RunUpdate();
     })
 
