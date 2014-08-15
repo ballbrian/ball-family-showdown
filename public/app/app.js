@@ -32,3 +32,11 @@ angular.module('app').config(function($routeProvider, $locationProvider){
             resolve: routeRoleChecks.user
         })
 });
+
+angular.module('app').run(function($rootScope, $location) {
+    $rootScope.$on('$routeChangeError', function(evt, current, previous, rejection) {
+        if(rejection === 'Not Authorized') {
+            $location.path('/');
+        }
+    })
+})

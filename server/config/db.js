@@ -3,10 +3,12 @@ var crypto = require('crypto');
 var encrypt = require('../utilities/encryption');
 var schedule = require('node-schedule');
 
-var userModel = require('../model/user'),
-    teamsModel = require('../model/teams'),
+var teamModel = require('../model/teams'),
+    userModel = require('../model/user'),
     picksModel = require('../model/picks'),
     weeksModel = require('../model/weeks');
+
+var TeamsController = require('../controllers/teams');
 
 module.exports = function(config) {
     mongoose.connect(config.db);
@@ -19,7 +21,7 @@ module.exports = function(config) {
 
 //    userModel.createDefaultUsers();
 
-    teamsModel.createTeams();
+    TeamsController.createTeams();
     setTimeout(function() {
         weeksModel.createWeeksAndGames();
     }, 5000);

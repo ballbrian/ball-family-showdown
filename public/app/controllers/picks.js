@@ -1,4 +1,4 @@
-angular.module('app').controller('picksController', function($scope, dateFormatter, bfNotifier, bfIdentity, bfPicks, bfWeeks, bfGames, bfTeams) {
+angular.module('app').controller('picksController', function($scope, $location, dateFormatter, bfNotifier, bfIdentity, bfPicks, bfWeeks, bfGames, bfTeams) {
     $scope.maxPoints = [];
 
     $scope.teamsMap = {};
