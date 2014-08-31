@@ -6,9 +6,12 @@ var schedule = require('node-schedule');
 var teamModel = require('../model/teams'),
     userModel = require('../model/user'),
     picksModel = require('../model/picks'),
-    weeksModel = require('../model/weeks');
+    weeksModel = require('../model/weeks'),
+    adminModel = require('../model/admin');
 
+var GamesController = require('../controllers/games');
 var TeamsController = require('../controllers/teams');
+var adminController = require('../controllers/admin');
 
 module.exports = function(config) {
     mongoose.connect(config.db);
@@ -19,11 +22,15 @@ module.exports = function(config) {
         console.log('ballshowdown db opened');
     });
 
+    adminController.defaultAdminOptions();
+
 //    userModel.createDefaultUsers();
 
     TeamsController.createTeams();
     setTimeout(function() {
-        weeksModel.createWeeksAndGames();
+        GamesController.createWeeksAndGames(function() {
+            console.log("Created Weeks and Games Callback");
+        });
     }, 5000);
 
     //CST is -500 UTC
@@ -67,7 +74,7 @@ var RunUpdate = function() {
         mm='0'+mm
     }
 
-    weeksModel.updateGames(today);
+    GamesController.updateGames(today);
 
     today = mm+'/'+dd+'/'+yyyy + " - " + hh+":"+mm+":"+ss;
 

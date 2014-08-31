@@ -31,6 +31,11 @@ angular.module('app').config(function($routeProvider, $locationProvider){
             controller: 'picksController',
             resolve: routeRoleChecks.user
         })
+        .when('/admin', {
+            templateUrl: 'partials/admin',
+            controller: 'adminController',
+            resolve: routeRoleChecks.user
+        })
 });
 
 angular.module('app').run(function($rootScope, $location) {

@@ -72,3 +72,12 @@ exports.savePicks = function(req, res) {
         })
     });
 }
+
+exports.removePicks = function(callback) {
+    Pick.remove({}, function(err) {
+        if(err) {
+            callback(err);
+        }
+        callback();
+    })
+}

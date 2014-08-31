@@ -1,0 +1,12 @@
+div(ng-controller='adminController')
+h1 Admin Page
+.row
+    .col-md-8
+        select.form-control(ng-model="season", ng-options="season.id as season.name for season in seasons")
+    .col-md-4
+        input(type="checkbox" ng-model="reset")
+        |  Reset
+hr
+.row
+    .col-xs-12
+        button.btn.btn-primary.submitButton(ng-click="saveAdminOptions()") Save
