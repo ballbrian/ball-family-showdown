@@ -3,7 +3,7 @@ div(ng-controller='picksController')
         h1 Picks
     div.centerLoad
         i.fa.fa-cog.fa-spin.fa-5x(ng-hide="true")
-    select.form-control(ng-cloak ng-model="selectedWeek", ng-change="getWeek(selectedWeek)", ng-options="week.week for week in weeks")
+    select.form-control(ng-cloak ng-model="selectedWeek", ng-change="getWeek(selectedWeek)", ng-options="week.week for week in weeks | orderBy: sortWeeks")
         option(value="") Select Week
     div.picks(ng-show="picks != null")
         div(ng-repeat="game in picks")

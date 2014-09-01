@@ -23,6 +23,10 @@ angular.module('app').controller('picksController', function($scope, $location, 
         })
     });
 
+    $scope.sortWeeks = function(week) {
+        return parseInt(week.week);
+    }
+
     $scope.getPoints = function(score, status) {
         status = status.toLowerCase();
         if(status == "inprogress" || status == "closed" || status == "complete" || status == "delayed") {
