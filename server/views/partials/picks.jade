@@ -20,9 +20,9 @@ div(ng-controller='picksController')
                         .col-xs-6
                             h5.pull-right(ng-hide="disablePick(game.status)", ng-bind='formattedDate(game.scheduled)')
                     .row
-                        .col-xs-8
+                        .col-xs-7.col-md-8
                             select.form-control(ng-model="game.pick" ng-options="teamsMap[value].name for value in game.teams", ng-disabled="disablePick(game.status)")
-                        .col-xs-4
+                        .col-xs-5.col-md-4
                             select.form-control(ng-model="game.points" ng-options="point for point in getAvailablePoints(game)", ng-disabled="disablePick(game.status)")
                                 option(value="0") Points
                 .panel-body
