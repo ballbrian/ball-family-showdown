@@ -41,19 +41,27 @@ module.exports = function(config) {
     // 11 = 4
 
 
+    setTimeout(function() {
+        RunUpdate();
+    }, 10000);
+
     var rule = new schedule.RecurrenceRule();
-    rule.dayOfWeek = [0, new schedule.Range(5,6)];
+    rule.dayOfWeek = [0, 1, 5];
     rule.hour = new schedule.Range(0, 4);
     rule.minute = [0, 15, 30, 45];
 
     schedule.scheduleJob(rule, function() {
-//    schedule.scheduleJob("*/15 19,20,21,22 * * 4,5,6", function() {
         RunUpdate();
     })
 
-    setTimeout(function() {
+    rule = new schedule.RecurrenceRule();
+    rule.dayOfWeek = [6];
+    rule.hour = new schedule.Range(17, 23); //23 - 6, 22 - 5, 21 - 4, 20 - 3, 19 - 2, 18 - 1, 17 - 12,
+    rule.minute = [0, 15, 30, 45];
+
+    schedule.scheduleJob(rule, function() {
         RunUpdate();
-    }, 10000);
+    })
 
 }
 

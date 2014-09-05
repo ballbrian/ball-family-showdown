@@ -107,62 +107,60 @@ function loopIterate(array, callback, interval) {
         var week = array.shift();
         if(week != null)
         {
-            var currentDate = new Date();
-            var startDate = new Date(week.start);
-            if (week.completed == false) {
-                console.log("Checking Week " + week.week);
-                if (currentDate.getTime() > startDate.getTime()) {
+            var season = "PRE";
 
-                    var season = "PRE";
+            Admin.find({}, function(err, collection) {
+                if(err) {
+                    console.log("Error finding Admin Options");
+                } else {
+                    season = collection[0].season;
+                    var currentDate = new Date();
+                    var startDate = new Date(week.start);
+                    if (week.completed == false) {
+                        console.log("Checking Week " + week.week);
+                        if (currentDate.getTime() > startDate.getTime()) {
+                            var currentWeek = week.week;
+                            console.log("Grabbing Week");
+                            request.get({
+                                    uri: "http://api.sportsdatallc.org/nfl-t1/2014/"+season+"/" + currentWeek + "/boxscore.json?api_key=" + api_key,
+                                    json: true,
+                                    headers: {
+                                        'Content-Type': 'application/x-www-form-urlencoded'
+                                    }
+                                },
+                                function (error, res, object) {
+                                    if (error) {
+                                        console.log(error.message);
+                                    }
+                                    else {
+                                        var games = object.games;
+                                        getGames(games);
 
-                    Admin.find({}, function(err, collection) {
-                        if(err) {
-                            console.log("Error finding Admin Options");
-                        } else {
-                            season = collection[0].season;
+                                        console.log("Games For Week " + currentWeek + " Updated");
+                                    }
+                                })
                         }
-                    });
 
-                    var currentWeek = week.week;
-                    console.log("Grabbing Week");
-                    request.get({
-                            uri: "http://api.sportsdatallc.org/nfl-t1/2014/PRE/" + currentWeek + "/boxscore.json?api_key=" + api_key,
-                            json: true,
-                            headers: {
-                                'Content-Type': 'application/x-www-form-urlencoded'
-                            }
-                        },
-                        function (error, res, object) {
-                            if (error) {
-                                console.log(error.message);
-                            }
-                            else {
-                                var games = object.games;
-                                getGames(games);
-
-                                console.log("Games For Week " + currentWeek + " Updated");
+                        Pick.find({week: week.week, status: {$ne: 'closed'}}, function(err, picks) {
+                            if(err) {
+                                console.log(err.message);
+                            } else {
+                                if(picks.length === 0) {
+                                    week.completed = true;
+                                    week.save(function(err) {
+                                        if(err) {
+                                            console.log(err.message);
+                                        } else {
+                                            console.log("Week Completed");
+                                        }
+                                    })
+                                }
                             }
                         })
-                }
 
-                Pick.find({week: week.week, status: {$ne: 'closed'}}, function(err, picks) {
-                    if(err) {
-                        console.log(err.message);
-                    } else {
-                        if(picks.length === 0) {
-                            week.completed = true;
-                            week.save(function(err) {
-                                if(err) {
-                                    console.log(err.message);
-                                } else {
-                                    console.log("Week Completed");
-                                }
-                            })
-                        }
                     }
-                })
-
-            }
+                }
+            });
         }
         else {
             callback;
