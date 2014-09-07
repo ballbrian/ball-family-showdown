@@ -225,6 +225,7 @@ var updatePicks = function(picks, game) {
                                 pick.calculated = true;
                                 user.total++;
 
+                                console.log("User: " + pick.user + " Pick: " + pick.pick);
                                 console.log('Pick Updated');
 
                                 user.save(function (err) {
