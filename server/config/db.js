@@ -55,7 +55,7 @@ module.exports = function(config) {
     })
 
     rule = new schedule.RecurrenceRule();
-    rule.dayOfWeek = [6];
+    rule.dayOfWeek = [0];
     rule.hour = new schedule.Range(17, 23); //23 - 6, 22 - 5, 21 - 4, 20 - 3, 19 - 2, 18 - 1, 17 - 12,
     rule.minute = [0, 15, 30, 45];
 

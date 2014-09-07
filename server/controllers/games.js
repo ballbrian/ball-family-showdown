@@ -215,7 +215,6 @@ var updatePicks = function(picks, game) {
                             console.log(err.message);
                         } else {
                             if (user.length === 0) {
-
                                 console.log("ERROR: User Not Found");
                             } else {
                                 if (pick.pick == pick.teams[winner] && pick.pick != null) {
