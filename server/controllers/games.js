@@ -219,11 +219,11 @@ var updatePicks = function(picks, game) {
                             } else {
                                 if (pick.pick == pick.teams[winner] && pick.pick != null) {
                                     user.score += pick.points;
-                                    user.correct++;
+                                    user.correct += 1;
                                 }
 
                                 pick.calculated = true;
-                                user.total++;
+                                user.total += 1;
 
                                 console.log("User: " + pick.user + " Pick: " + pick.pick);
                                 console.log('Pick Updated');
