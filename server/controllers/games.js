@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 var request = require('request');
 
+var winston = require('winston');
+
 var Week = mongoose.model('Week');
 var User = mongoose.model('User');
 var Game = mongoose.model('Game');
@@ -84,12 +86,12 @@ exports.removeGames = function(callback) {
 }
 
 exports.updateGames = function(today) {
-    var currentWeek = 0;
     Week.find({}).exec(function(err, collection) {
         if(err) {
 
         } else {
             loopIterate(collection, function() {
+                winston.log("info", "Finished");
                 console.log("Done");
             }, 5000);
         }
@@ -134,9 +136,10 @@ function loopIterate(array, callback, interval) {
                                     }
                                     else {
                                         var games = object.games;
-                                        getGames(games);
-
-                                        console.log("Games For Week " + currentWeek + " Updated");
+                                        getGames(games, function() {
+                                            console.log("Games For Week " + currentWeek + " Updated");
+                                            winston.log("info", "Games For Week " + currentWeek + " Updated");
+                                        });
                                     }
                                 })
                         }
@@ -170,7 +173,7 @@ function loopIterate(array, callback, interval) {
     }
 };
 
-function getGames(games) {
+function getGames(games, callback) {
     update();
 
     function update()
@@ -185,16 +188,20 @@ function getGames(games) {
                         console.log("No Picks Exists")
                     } else {
                         console.log("Updating Picks");
-                        updatePicks(picks, game);
+                        winston.log("info", "Updating Picks");
+                        updatePicks(picks, game, function() {
+                            update();
+                        }, 1000);
                     }
                 }
             });
-            update();
+        } else {
+            callback();
         }
     }
 }
 
-var updatePicks = function(picks, game) {
+var updatePicks = function(picks, game, callback, interval) {
     update();
 
     function update()
@@ -209,7 +216,6 @@ var updatePicks = function(picks, game) {
                     if (game.away_team.points > game.home_team.points) {
                         winner = 1;
                     }
-                    console.log(pick.user);
                     User.findOne({username: pick.user}, function (err, user) {
                         if (err) {
                             console.log(err.message);
@@ -227,22 +233,27 @@ var updatePicks = function(picks, game) {
 
                                 console.log("User: " + pick.user + " Pick: " + pick.pick);
                                 console.log('Pick Updated');
+                                winston.log("info","User: " + pick.user + " Pick: " + pick.pick);
+                                winston.log("info",'Pick Updated');
 
                                 user.save(function (err) {
                                     if (err) {
                                         console.log(err.message);
                                     } else {
+                                        winston.log("info", "User Points Updated");
                                         console.log("User Points Updated");
+
+                                        pick.save(function(err) {
+                                            if(err) {
+                                                console.log(err);
+                                            } else {
+                                                winston.log("info", "Game Updated - Saved");
+                                                console.log("Game Updated");
+                                            }
+                                            update();
+                                        });
                                     }
                                 })
-
-                                pick.save(function(err) {
-                                    if(err) {
-                                        console.log(err);
-                                    } else {
-                                        console.log("Game Updated");
-                                    }
-                                });
                             }
                         }
                     })
@@ -252,13 +263,15 @@ var updatePicks = function(picks, game) {
                     if(err) {
                         console.log(err);
                     } else {
+                        winston.log("info", "Game Updated");
                         console.log("Game Updated");
                     }
+                    update();
                 });
             }
-
-            update();
-        };
+        } else {
+            callback();
+        }
     }
 }
 
