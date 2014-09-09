@@ -166,7 +166,7 @@ function loopIterate(array, callback, interval) {
             });
         }
         else {
-            callback;
+            callback();
         }
 
         setTimeout(process, interval);
@@ -190,8 +190,9 @@ function getGames(games, callback) {
                         console.log("Updating Picks");
                         winston.log("info", "Updating Picks");
                         updatePicks(picks, game, function() {
+                            console.log("back");
                             update();
-                        }, 1000);
+                        });
                     }
                 }
             });
@@ -201,21 +202,24 @@ function getGames(games, callback) {
     }
 }
 
-var updatePicks = function(picks, game, callback, interval) {
+var updatePicks = function(picks, game, callback) {
     update();
 
     function update()
     {
         var pick = picks.shift();
         if(pick != null) {
+            console.log(game);
             pick.status = game.status;
             pick.scores = [game.home_team.points, game.away_team.points];
             if(game.status == 'closed' || game.status == 'complete') {
+                console.log("Game Closed");
                 if(pick.calculated === false) {
                     var winner = 0;
                     if (game.away_team.points > game.home_team.points) {
                         winner = 1;
                     }
+                    console.log("Winner: " + winner);
                     User.findOne({username: pick.user}, function (err, user) {
                         if (err) {
                             console.log(err.message);
@@ -223,6 +227,7 @@ var updatePicks = function(picks, game, callback, interval) {
                             if (user.length === 0) {
                                 console.log("ERROR: User Not Found");
                             } else {
+                                console.log("jdlkfajsdfj");
                                 if (pick.pick == pick.teams[winner] && pick.pick != null) {
                                     user.score += pick.points;
                                     user.correct += 1;
@@ -251,14 +256,18 @@ var updatePicks = function(picks, game, callback, interval) {
                                                 console.log("Game Updated");
                                             }
                                             update();
+                                            console.log("update called")
                                         });
                                     }
                                 })
                             }
                         }
                     })
+                } else {
+                    update();
                 }
             } else {
+                console.log("I'm Here");
                 pick.save(function(err) {
                     if(err) {
                         console.log(err);
@@ -270,6 +279,7 @@ var updatePicks = function(picks, game, callback, interval) {
                 });
             }
         } else {
+            console.log("callback");
             callback();
         }
     }
