@@ -22,9 +22,10 @@ div(ng-controller='picksController')
                     .row
                         .col-xs-7.col-md-8
                             select.form-control(ng-model="game.pick" ng-options="teamsMap[value].name for value in game.teams", ng-disabled="disablePick(game.status)")
+                                option(empty-option)
                         .col-xs-5.col-md-4
                             select.form-control(ng-model="game.points" ng-options="point for point in getAvailablePoints(game)", ng-disabled="disablePick(game.status)")
-                                option(value="0") Points
+                                option(empty-option)
                 .panel-body
                     .col-sm-6.col-md-3
                         h5 <strong>Stadium:</strong> {{game.stadium}}

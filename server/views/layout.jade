@@ -9,6 +9,11 @@ html
     link(rel='stylesheet', href='/lib/ionicons/css/ionicons.min.css')
     link(rel="stylesheet", href="/lib/toastr/toastr.css")
     link(rel='stylesheet', href='/assets/stylesheets/style.css')
+
+  body(ng-app='app')
+    include ./includes/currentuser
+    block content
+
     script(type="text/javascript", src="/lib/jquery/dist/jquery.js")
     script(type="text/javascript", src="/lib/bootstrap/dist/js/bootstrap.js")
     script(type="text/javascript", src="/lib/toastr/toastr.js")
@@ -37,7 +42,4 @@ html
     script(type="text/javascript", src="/app/services/picks/bfTeams.js")
     script(type="text/javascript", src="/app/services/picks/bfGames.js")
     script(type="text/javascript", src="/assets/javascripts/ballfamilyshowdown.js")
-
-  body(ng-app='app')
-    include ./includes/currentuser
-    block content
+    script(type="text/javascript", src="/assets/iefix/dropdownfix.js")
