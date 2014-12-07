@@ -1,7 +1,7 @@
 var request = require('request');
 
-var api_key = "xfw4ebcua3pe2tvgwkfhxwyc";
-
+//var api_key = "xfw4ebcua3pe2tvgwkfhxwyc";
+var api_key = "53kk23z65fh3prjzb8d9p559";
 var TeamsURI = "http://api.sportsdatallc.org/nfl-t1/teams/hierarchy.json?api_key=";
 
 exports.GetSchedule = function() {

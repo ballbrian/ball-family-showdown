@@ -9,7 +9,8 @@ var Game = mongoose.model('Game');
 var Pick = mongoose.model('Pick');
 var Admin = mongoose.model('AdminOption');
 
-var api_key = "xfw4ebcua3pe2tvgwkfhxwyc";
+//var api_key = "xfw4ebcua3pe2tvgwkfhxwyc";
+var api_key = "53kk23z65fh3prjzb8d9p559";
 
 exports.createWeeksAndGames = function(callback) {
 

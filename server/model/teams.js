@@ -9,6 +9,6 @@ var teamSchema = mongoose.Schema({
 
 var Team = mongoose.model('Team', teamSchema);
 
-var api_key = "xfw4ebcua3pe2tvgwkfhxwyc";
+//var api_key = "xfw4ebcua3pe2tvgwkfhxwyc";
 
 
